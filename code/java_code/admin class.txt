@@ -1,0 +1,55 @@
+package project;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class admin extends user {
+
+    ArrayList<String> questions = new ArrayList<>();
+    ArrayList<ArrayList<String>> options = new ArrayList<>();
+    ArrayList<String> solutions = new ArrayList<>();
+    String role;
+
+    public void addQuestion() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the question:");
+        String question = scanner.nextLine();
+        questions.add(question);
+
+        ArrayList<String> questionOptions = new ArrayList<>();
+        System.out.println("Enter option A:");
+        questionOptions.add("A: " + scanner.nextLine());
+        System.out.println("Enter option B:");
+        questionOptions.add("B: " + scanner.nextLine());
+        System.out.println("Enter option C:");
+        questionOptions.add("C: " + scanner.nextLine());
+        System.out.println("Enter option D:");
+        questionOptions.add("D: " + scanner.nextLine());
+        options.add(questionOptions);
+
+        System.out.println("Enter the correct answer (A, B, C, D):");
+        String correctAnswer = scanner.nextLine().toUpperCase();
+        solutions.add(correctAnswer);
+    }
+
+    public int evaluateAnswers(ArrayList<String> userAnswers) {
+        int score = 0;
+
+        for (int i = 0; i < userAnswers.size(); i++) {
+            if (userAnswers.get(i).equalsIgnoreCase(solutions.get(i))) {
+                score++;
+            }
+        }
+        return score;
+    }
+
+    public void displayQuiz() {
+        for (int i = 0; i < questions.size(); i++) {
+            System.out.println((i + 1) + ". " + questions.get(i));
+            for (String option : options.get(i)) {
+                System.out.println(option);
+            }
+        }
+    }
+}

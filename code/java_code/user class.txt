@@ -1,0 +1,17 @@
+package project;
+
+public abstract class user {
+    String user_id;
+    String name;
+    String email;
+    String password;
+
+    public boolean confirmCredentials(String[] usernames, String[] passwords, String enteredUser, String enteredPass) {
+        for (int i = 0; i < usernames.length; i++) {
+            if (usernames[i].equals(enteredUser) && passwords[i].equals(enteredPass)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

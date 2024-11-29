@@ -1,0 +1,60 @@
+package project;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class test_code {
+
+    public static void main(String[] args) {
+        String[] usernames = {"abderrahmen", "adam", "molka"};
+        String[] passwords = {"abderrahmen", "adam", "molka"};
+
+        admin adminUser = new admin();
+        student studentUser = new student();
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Simulating login for admin
+        System.out.println("Enter username:");
+        String enteredUser = scanner.nextLine();
+        System.out.println("Enter password:");
+        String enteredPass = scanner.nextLine();
+
+        if (adminUser.confirmCredentials(usernames, passwords, enteredUser, enteredPass)) {
+            System.out.println("Login successful!");
+
+            // Adding questions
+            adminUser.addQuestion();
+            adminUser.addQuestion();
+
+            // Displaying quiz
+            adminUser.displayQuiz();
+
+            // Simulating student answers
+            ArrayList<String> studentAnswers = new ArrayList<>();
+            System.out.println("Enter username:");
+            String enteredUser1 = scanner.nextLine();
+            System.out.println("Enter password:");
+            String enteredPass1 = scanner.nextLine();
+            if (adminUser.confirmCredentials(usernames, passwords, enteredUser1, enteredPass1)) {
+                System.out.println("Login successful!");
+	            System.out.println("Enter your answers:");
+	            for (int i = 0; i < adminUser.questions.size(); i++) {
+	                System.out.println("Answer for question " + (i + 1) + ":");
+	                studentAnswers.add(scanner.nextLine());
+	            }
+	
+	            // Evaluating the score
+	            int score = adminUser.evaluateAnswers(studentAnswers);
+	            System.out.println("Your score is: " + score + "/" + adminUser.questions.size());
+            } else {
+            	System.out.println("Invalid credentials. Access denied.");
+            }
+            
+        } else {
+            System.out.println("Invalid credentials. Access denied.");
+        }
+
+        scanner.close();
+    }
+}
